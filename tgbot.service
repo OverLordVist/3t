@@ -7,7 +7,8 @@ User=alex
 Group=alex
 
 WorkingDirectory=/home/alex/3t/
-Environment=/home/alex/3t/.venv/bin/python /home/alex/3t/main.py
+Environment="PYTHONPATH=/home/alex/3t/"
+ExecStart=/home/alex/3t/.venv/bin/python /home/alex/3t/main.py
 
 [Install]
 WantedBy=multi-user.target
