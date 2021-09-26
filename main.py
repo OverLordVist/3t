@@ -13,31 +13,12 @@ import os
 from flask import Flask, request
 
 
-URL = f'https://178.172.138.109'
-server = Flask(__name__)
-token = config.token
-
-
 
 water_db = db.water_db
 # water_db.create_product()
 bot = config.bot
 product = catalog.product
 
-
-@server.route('/' + token, methods=['POST'])
-def get_message():
-    json_string = request.get_data().decode('utf-8')
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return '!', 200
-
-
-@server.route('/')
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url=URL)
-    return '!', 200
 
 
 @bot.message_handler(commands=['start'])
@@ -71,4 +52,4 @@ def main_menu(message):
 
 
 if __name__ == '__main__':
-    server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    bot.infinity_polling()
